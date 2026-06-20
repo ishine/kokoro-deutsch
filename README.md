@@ -38,11 +38,16 @@ The end-to-end pipeline is working:
 
 `Dataset preparation -> Weight conversion -> Stage 1 -> Stage 2 -> Voicepack extraction -> KModel inference`
 
-## Published Model
+## Published Models & Voices
 
-### German Multi-Speaker Base Model (Stage 1)
+All checkpoints are compatible with the Kokoro-82M inference pipeline.
 
-**dida-80b/kokoro-deutsch-hui-base** is available on HuggingFace.
+### Base Model
+
+**dida-80b/kokoro-deutsch-hui-base** is a German multi-speaker Stage 1 base model
+trained on ~51 hours of audio. It is not a finished single-speaker voice —
+use it as a starting point for training your own with
+`docs/TRAINING_GUIDE.md`.
 
 | Specification | Value |
 |---|---|
@@ -55,35 +60,19 @@ The end-to-end pipeline is working:
 | Model | [dida-80b/kokoro-deutsch-hui-base](https://huggingface.co/dida-80b/kokoro-deutsch-hui-base) |
 | Dataset | [dida-80b/hui-german-51speakers](https://huggingface.co/datasets/dida-80b/hui-german-51speakers) |
 
-This is a base model, not a finished single-speaker voice.
+### Fine-Tuned Voices
 
-## Quick Setup
+Stage 2 single-speaker fine-tunings. Each ships with a speaker voicepack.
+Click the links to hear speech demos directly from HuggingFace.
 
-### Prerequisites
+#### German (de)
 
-```bash
-# Ubuntu/Debian
-sudo apt-get install espeak-ng libsndfile1
+| Voice | Speaker | Samples | License | Demo |
+|-------|---------|---------|---------|------|
+| **[kikiri-german-martin](https://huggingface.co/kikiri-tts/kikiri-german-martin)** | Martin Harbecke (male) | 627 | Apache 2.0 | [Speech Demo](https://huggingface.co/kikiri-tts/kikiri-german-martin/blob/main/README.md#demo) |
+| **[kikiri-german-victoria](https://huggingface.co/kikiri-tts/kikiri-german-victoria)** | Victoria Asztaller (female) | 455 | Apache 2.0 | [Speech Demo](https://huggingface.co/kikiri-tts/kikiri-german-martin/blob/main/README.md#demo) |
 
-# macOS
-brew install espeak-ng libsndfile
-```
-
-### Clone
-
-> [!IMPORTANT]
-> The `kokoro/` and `StyleTTS2/` code lives in **git submodules**. Clone with
-> `--recurse-submodules`, or run `git submodule update --init --recursive` if
-> you already cloned without them — otherwise those directories will be empty.
-
-```bash
-git clone --recurse-submodules https://github.com/semidark/kikiri-tts
-cd kikiri-tts
-uv sync
-```
-
-`uv sync` selects a compatible interpreter via the pinned `.python-version`
-(Python 3.12; see [Python version](docs/TRAINING_GUIDE.md#python-environment)).
+*More voices and languages coming soon. Check the [kikiri-tts](https://huggingface.co/kikiri-tts) HuggingFace organization for updates.*
 
 ## Running Verification Tests
 
